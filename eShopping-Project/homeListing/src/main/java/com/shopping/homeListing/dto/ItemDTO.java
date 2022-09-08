@@ -14,7 +14,7 @@ import javax.validation.constraints.NotNull;
 @Data
 public class ItemDTO {
 
-    private Long    itemId;
+    private String    itemId;
 
     @NotNull(message = "Item Name cannot be empty")
     private String  itemName;

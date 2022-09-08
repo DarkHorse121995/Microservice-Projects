@@ -24,7 +24,7 @@ public class HomeListingController {
     }
 
     @GetMapping(value = "/getItem/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
-    public Item getItembyId(@PathVariable("id") Long itemId) throws ItemNotFoundException{
+    public Item getItembyId(@PathVariable("id") String itemId) throws ItemNotFoundException{
         return listingService.getItembyId(itemId);
     }
 
@@ -34,12 +34,12 @@ public class HomeListingController {
     }
 
     @PutMapping(value = "/updateItem/{id}", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
-    public Item updateItem(@RequestBody @Valid ItemDTO item, @PathVariable("id") Long itemId) throws ItemNotFoundException {
+    public Item updateItem(@RequestBody @Valid ItemDTO item, @PathVariable("id") String itemId) throws ItemNotFoundException {
         return listingService.updateItem(item, itemId);
     }
 
     @DeleteMapping("/delete/{id}")
-    public List<Item> deleteById(@PathVariable("id") Long itemId) throws ItemNotFoundException{
+    public List<Item> deleteById(@PathVariable("id") String itemId) throws ItemNotFoundException{
         listingService.deleteById(itemId);
         return listingService.getAllItems();
     }

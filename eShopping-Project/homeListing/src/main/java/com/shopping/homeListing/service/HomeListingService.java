@@ -22,13 +22,13 @@ public class HomeListingService {
     }
 
     @Transactional
-    public Item getItembyId(Long itemId) throws ItemNotFoundException{
-        return listingRepository.findById(itemId).orElseThrow(() -> {return new ItemNotFoundException(itemId + " not found!!");});
+    public Item getItembyId(String itemId) throws ItemNotFoundException{
+        return listingRepository.findById(itemId).orElseThrow(() -> new ItemNotFoundException(itemId + " not found!!"));
     }
 
     @Transactional
     public Item addNewItem(ItemDTO item){
-        Item entity = Item.createNew(0L,item.getItemName(),item.getItemCompany(),item.getItemDetails(),item.getItemCategory(),item.getItemStockRemaining());
+        Item entity = Item.createNew("0",item.getItemName(),item.getItemCompany(),item.getItemDetails(),item.getItemCategory(),item.getItemStockRemaining());
 //        Item entity = new Item();
 //        entity.setItemName(item.getItemName());
 //        entity.setItemCompany(item.getItemCompany());
@@ -40,7 +40,7 @@ public class HomeListingService {
     }
 
     @Transactional
-    public Item updateItem(ItemDTO item, Long itemId) throws ItemNotFoundException{
+    public Item updateItem(ItemDTO item, String itemId) throws ItemNotFoundException{
         Item entity = listingRepository.findById(itemId)
                 .orElseThrow(() -> {return new ItemNotFoundException("Item " + item.getItemName()+ " not found!!");});
         entity.setItemCompany(item.getItemCompany());
@@ -52,7 +52,7 @@ public class HomeListingService {
     }
 
     @Transactional
-    public void deleteById(Long itemId) throws ItemNotFoundException{
+    public void deleteById(String itemId) throws ItemNotFoundException{
         Item entity = listingRepository.findById(itemId).orElseThrow(() -> {return new ItemNotFoundException(itemId + " not deleted!!");});
         listingRepository.deleteById(itemId);
     }
